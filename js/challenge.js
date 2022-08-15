@@ -64,15 +64,17 @@ document.getElementById("pause").addEventListener("click", ()=>{
     }
 })
 
-// Comment submit button
-document.getElementById("submit").addEventListener("click", ()=>{
-    let commentInputNode = document.getElementById("comment-input")
-    if (commentInputNode.textContent.length>0){
-        let comment = document.createElement("p")
-        comment.textContent = commentInputNode.textContent
+// Comment forum
+document.getElementById("comment-form").addEventListener("submit", (event)=>{
+    // stop forum from trying to send some HTTP thing
+    event.preventDefault();
 
+    let commentInputNode = event.target.children[0]
+    if (commentInputNode.value.length>0){
+        let comment = document.createElement("p")
+        comment.textContent = commentInputNode.value
         document.querySelector("#list.comments").appendChild(comment)
 
-        commentInputNode.textContent = ""
+        commentInputNode.value = ""
     }
 })
